@@ -1,0 +1,52 @@
+[user]
+name = Dante Sparrås
+email = 55974949+dante-sparras@users.noreply.github.com
+
+[core]
+editor = code --wait
+
+[diff]
+tool = code --wait --diff
+
+[init]
+    defaultBranch = main
+
+[push]
+    autoSetupRemote = true
+
+[pull]
+    rebase = true
+
+[fetch]
+prune = true
+
+[diff]
+algorithm = histogram
+
+[rerere]
+enabled = true
+
+[alias]
+cleanup = !git fetch --all --prune && git branch --merged | egrep -v \"(^\\*|main|master)\" | xargs -r git branch -d
+
+{{- if .is_linux }}
+
+[credential "https://github.com"]
+    helper =
+    helper = !/usr/bin/gh auth git-credential
+
+[credential "https://gist.github.com"]
+    helper =
+    helper = !/usr/bin/gh auth git-credential
+
+{{- else if .is_windows }}
+
+[credential]
+    helper = manager
+
+{{- else if .is_macos }}
+
+[credential]
+    helper = osxkeychain
+
+{{- end }}
