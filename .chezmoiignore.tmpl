@@ -1,0 +1,13 @@
+# Read more here:
+# https://www.chezmoi.io/reference/special-files/chezmoiignore/
+
+{{- if .is_windows }}
+dot_zshrc
+# Add files here to ignore on Windows...
+{{- else if .is_linux }}
+# Add files here to ignore on Linux...
+{{- else if .is_wsl }}
+# Add files here to ignore on WSL...
+{{- else if .is_macos }}
+# Add files here to ignore on macOS...
+{{- end }}
