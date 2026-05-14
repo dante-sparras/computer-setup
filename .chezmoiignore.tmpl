@@ -9,6 +9,7 @@ README.md
 {{- end }}
 
 {{- if .is_linux }}
+AppData/Local/Packages/Microsoft.WindowsTerminal*/LocalState/settings.json
 # Linux ignore patterns here...
     
     {{- if .is_wsl }}
@@ -17,5 +18,6 @@ README.md
 {{- end }}
 
 {{- if .is_macos }}
+AppData/Local/Packages/Microsoft.WindowsTerminal*/LocalState/settings.json
 # macOS ignore patterns here...
 {{- end }}
