@@ -1,11 +1,15 @@
 [data]
-  os = "{{ .chezmoi.os }}"
+os = "{{ .chezmoi.os }}"
 
-  {{- $isWSL   := and (eq .chezmoi.os "linux") (contains "microsoft" (output "cat" "/proc/version")) -}}
-  {{- $isLinux := eq .chezmoi.os "linux" -}}
+{{- if eq .chezmoi.os "linux" }}
+is_wsl = {{ contains "microsoft" (output "cat" "/proc/version") }}
+is_linux = true
+is_fedora = {{ eq .chezmoi.osRelease.id "fedora" }}
+{{- else }}
+is_wsl = false
+is_linux = false
+is_fedora = false
+{{- end }}
 
-  is_macos   = {{ eq .chezmoi.os "darwin" }}
-  is_windows = {{ eq .chezmoi.os "windows" }}
-  is_wsl     = {{ $isWSL }}
-  is_linux   = {{ $isLinux }}
-  is_fedora  = {{ and $isLinux (eq .chezmoi.osRelease.id "fedora") }}
+is_macos = {{ eq .chezmoi.os "darwin" }}
+is_windows = {{ eq .chezmoi.os "windows" }}
