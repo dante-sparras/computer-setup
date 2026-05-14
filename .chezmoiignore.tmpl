@@ -1,6 +1,21 @@
 # Read more here:
 # https://www.chezmoi.io/reference/special-files/chezmoiignore/
 
+README.md
+
 {{- if .is_windows }}
 .zshrc
+# Windows ignore patterns here...
+{{- end }}
+
+{{- if .is_linux }}
+# Linux ignore patterns here...
+    
+    {{- if .is_wsl }}
+    # WSL ignore patterns here...
+    {{- end }}
+{{- end }}
+
+{{- if .is_macos }}
+# macOS ignore patterns here...
 {{- end }}
