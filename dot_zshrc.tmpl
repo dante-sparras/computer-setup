@@ -1,0 +1,116 @@
+{{- if .is_wsl }}
+# =============================================================================
+# WSL (Windows Subsystem for Linux)
+# =============================================================================
+
+# Aliases
+
+alias cdc='cd /mnt/c'
+alias cdd='cd /mnt/d'
+
+# Functions
+
+win() {
+  local user_profile
+  if command -v powershell.exe >/dev/null 2>&1 && command -v wslpath >/dev/null 2>&1; then
+    user_profile="$(powershell.exe -NoProfile -Command '[Environment]::GetFolderPath("UserProfile")' 2>/dev/null | tr -d '\r')"
+    if [[ -n "$user_profile" ]]; then
+      cd "$(wslpath "$user_profile")" || return
+      return
+    fi
+  fi
+  cd "/mnt/c/Users/$USER" || return
+}
+
+exp() {
+  command -v explorer.exe >/dev/null 2>&1 || { print "explorer.exe not found"; return 1; }
+  explorer.exe "${1:-.}" >/dev/null 2>&1 &
+}
+
+{{- end }}
+# =============================================================================
+# Functions
+# =============================================================================
+
+update() {
+  if command -v dnf >/dev/null 2>&1; then
+    sudo dnf upgrade --refresh -y
+  elif command -v apt >/dev/null 2>&1; then
+    sudo apt update && sudo apt upgrade -y
+  elif command -v pacman >/dev/null 2>&1; then
+    sudo pacman -Syu --noconfirm
+  else
+    echo "No supported package manager found."
+  fi
+
+  if command -v npm >/dev/null 2>&1; then
+    npm update -g
+  fi
+
+  if command -v bun >/dev/null 2>&1; then
+    bun update -g || true
+  fi
+
+  hash -r 2>/dev/null || true
+}
+
+# =============================================================================
+# Aliases
+# =============================================================================
+
+alias ..='cd ..'
+alias ...='cd ../..'
+
+if command -v eza >/dev/null 2>&1; then
+  alias ls='eza --icons --git --group-directories-first'
+  alias ll='eza -l --icons --git --group-directories-first'
+  alias la='eza -la --icons --git --group-directories-first'
+fi
+
+if command -v bat >/dev/null 2>&1; then
+  alias cat='bat --paging=never --style=plain'
+fi
+
+if command -v rg >/dev/null 2>&1; then
+  alias grep='rg'
+fi
+
+if command -v fd >/dev/null 2>&1; then
+  alias find='fd'
+fi
+
+if command -v btop >/dev/null 2>&1; then
+  alias top='btop'
+fi
+
+if command -v fastfetch >/dev/null 2>&1; then
+  alias sysinfo='fastfetch'
+fi
+
+# =============================================================================
+# Environment Variables
+# =============================================================================
+
+export PATH="$HOME/.local/bin:$PATH"
+
+# =============================================================================
+# Initialization
+# =============================================================================
+
+if command -v zoxide >/dev/null 2>&1; then
+  eval "$(zoxide init zsh)"
+fi
+
+if command -v fzf >/dev/null 2>&1; then
+  source <(fzf --zsh)
+fi
+
+if command -v oh-my-posh >/dev/null 2>&1; then
+  omp_config="$HOME/.config/oh-my-posh/config.toml"
+  if [[ -f "$omp_config" ]]; then
+    eval "$(oh-my-posh init zsh --config "$omp_config")"
+  else
+    eval "$(oh-my-posh init zsh)"
+  fi
+  unset omp_config
+fi
