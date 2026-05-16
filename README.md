@@ -55,3 +55,35 @@ git add .
 git commit -m "Your commit message"
 git push
 ```
+
+## Hermes Agent Backups (Proton Drive)
+
+Hermes Agent data (config, memory, skills, sessions, etc.) is automatically backed up daily to Proton Drive using rclone.
+
+### Backup Location
+- **Proton Drive folder**: `Hermes Backups/`
+- Each backup is timestamped (e.g. `20260516_143312/`)
+
+### Restore on a New Machine
+
+1. Install rclone and configure Proton Drive remote:
+   ```bash
+   curl -s https://rclone.org/install.sh | sudo bash
+   rclone config          # Create remote named exactly "proton" using protondrive backend
+   ```
+
+2. Download the latest backup:
+   ```bash
+   mkdir -p ~/Backups/hermes
+   rclone copy "proton:Hermes Backups" ~/Backups/hermes --max-age 7d
+   ```
+
+3. Restore the most recent backup:
+   ```bash
+   LATEST=$(ls -1 ~/Backups/hermes | tail -1)
+   cp -a ~/Backups/hermes/$LATEST/* ~/.hermes/
+   ```
+
+4. Restart Hermes (or the gateway).
+
+The daily cron job will automatically resume after the first successful backup run.
