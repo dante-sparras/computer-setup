@@ -2,10 +2,13 @@
 # =============================================================================
 # computer-setup - Universal Environment Setup Script
 # =============================================================================
-# This script:
-#   1. Sets up the base environment based on OS (Linux/WSL/macOS)
-#   2. Applies all dotfiles using Chezmoi
-#   3. Restores Hermes Agent from Proton Drive backup (if available)
+# This script follows the established two-phase bootstrap pattern:
+#   PHASE 1: Bootstrap base environment (OS detection, Chezmoi, CLI tools incl. Notion ntn)
+#   PHASE 2: Apply dotfiles with Chezmoi
+#
+# Optional: Hermes Agent restore from Proton Drive (post-bootstrap)
+#
+# Strict separation: Windows UI/WSL bootstrap in setup.ps1; all Linux/WSL CLI in setup.sh
 #
 # Usage: ./setup.sh
 # =============================================================================
