@@ -1,38 +1,57 @@
-# Dotfiles
+# computer-setup
 
-## Prerequisites
+Modern cross-platform dotfiles managed with [Chezmoi](https://chezmoi.io/).
 
-- [Chezmoi](https://chezmoi.io/)
+## Quick Start (Recommended)
 
-# Set up a new machine
+Run the universal setup script for your platform:
 
-The following command will install all dotfiles:
-
+**Linux / WSL / macOS**
 ```bash
-chezmoi init --apply "dante-sparras"
+git clone https://github.com/dante-sparras/computer-setup.git ~/Projects/computer-setup
+cd ~/Projects/computer-setup
+./setup.sh
 ```
 
-# Update on an existing machine
+**Windows (PowerShell)**
+```powershell
+git clone https://github.com/dante-sparras/computer-setup.git $env:USERPROFILE\Projects\computer-setup
+cd $env:USERPROFILE\Projects\computer-setup
+.\setup.ps1
+```
 
-The following command will pull and apply the latest changes to the dotfiles:
+The scripts will:
+1. Install Chezmoi and modern CLI tools based on your OS
+2. Apply all dotfiles automatically
 
+## Manual Setup
+
+### Prerequisites
+- [Chezmoi](https://chezmoi.io/)
+
+### Set up a new machine
+```bash
+chezmoi init --apply "dante-sparras/computer-setup"
+```
+
+### Update on an existing machine
 ```bash
 chezmoi update -v
 ```
 
 ## Development
 
-To make changes to the dotfiles, you can edit the files in the `~/.local/share/chezmoi` directory. After making changes, you can apply them with the following command:
+To make changes to the dotfiles, edit the files in `~/.local/share/chezmoi` (or `%USERPROFILE%\.local\share\chezmoi` on Windows).
 
+After making changes:
 ```bash
 chezmoi apply -v
 ```
 
-To commit changes to the dotfiles, you can use the following commands:
-
+To commit changes:
 ```bash
 cd ~/.local/share/chezmoi
 git add .
 git commit -m "Your commit message"
-git push origin main
+git push
 ```
