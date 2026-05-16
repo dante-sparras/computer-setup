@@ -101,6 +101,14 @@ install_cli_tools() {
             fi
             ;;
     esac
+
+    # Notion CLI (ntn) - always install via official script (idempotent)
+    if command -v ntn >/dev/null 2>&1; then
+        log "Notion CLI (ntn) already installed ($(ntn --version 2>/dev/null || echo 'unknown version'))"
+    else
+        log "Installing Notion CLI (ntn)..."
+        curl -fsSL "https://ntn.dev" | NTN_INSTALL_DIR="$HOME/.local/bin" bash || warn "Notion CLI install failed — you can run it manually later"
+    fi
 }
 
 setup_wsl_specific() {

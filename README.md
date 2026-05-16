@@ -19,9 +19,9 @@ git clone https://github.com/dante-sparras/computer-setup.git $env:USERPROFILE\P
 cd $env:USERPROFILE\Projects\computer-setup
 .\setup.ps1
 ```
-
 The scripts will:
-1. Install Chezmoi and modern CLI tools based on your OS
+
+1. Install Chezmoi and modern CLI tools (including Notion CLI `ntn`)
 2. Apply all dotfiles automatically
 
 ## Manual Setup
