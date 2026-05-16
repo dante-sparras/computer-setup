@@ -4,7 +4,8 @@
 # =============================================================================
 # This script:
 #   1. Sets up the base environment based on OS (Linux/WSL/macOS)
-#   2. Then applies all dotfiles using Chezmoi
+#   2. Applies all dotfiles using Chezmoi
+#   3. Restores Hermes Agent from Proton Drive backup (if available)
 #
 # Usage: ./setup.sh
 # =============================================================================
@@ -146,6 +147,44 @@ apply_dotfiles() {
 }
 
 # =============================================================================
+# PHASE 3: Hermes Agent Restore from Proton Drive
+# =============================================================================
+
+restore_hermes() {
+    log "Checking for Hermes Agent backup on Proton Drive..."
+
+    if ! command -v rclone >/dev/null 2>&1; then
+        warn "rclone not installed. Skipping Hermes restore."
+        warn "Install rclone and run 'rclone config' to set up 'proton' remote later."
+        return 0
+    fi
+
+    if ! rclone listremotes | grep -q "^proton:"; then
+        warn "rclone remote 'proton' not configured. Skipping Hermes restore."
+        warn "Run 'rclone config' and create a remote named 'proton' using protondrive."
+        return 0
+    fi
+
+    log "Looking for latest Hermes backup..."
+    LATEST=$(rclone lsjson "proton:Hermes Backups" --max-depth 1 2>/dev/null | \
+        jq -r 'sort_by(.ModTime) | reverse | .[0].Name' 2>/dev/null || echo "")
+
+    if [[ -z "$LATEST" || "$LATEST" == "null" ]]; then
+        warn "No Hermes backups found on Proton Drive."
+        return 0
+    fi
+
+    log "Restoring Hermes from backup: $LATEST"
+    mkdir -p "$HOME/.hermes"
+    rclone copy "proton:Hermes Backups/$LATEST" "$HOME/.hermes" --progress --stats-one-line || {
+        warn "Hermes restore failed. You can run it manually later."
+        return 0
+    }
+
+    success "Hermes Agent restored from Proton Drive backup: $LATEST"
+}
+
+# =============================================================================
 # Main
 # =============================================================================
 
@@ -163,6 +202,9 @@ main() {
 
     phase "Phase 2: Dotfiles Application"
     apply_dotfiles
+
+    phase "Phase 3: Hermes Agent Restore (from Proton Drive)"
+    restore_hermes
 
     echo
     success "🎉 Complete environment setup finished!"
