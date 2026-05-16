@@ -24,3 +24,17 @@ This skill governs working with Chezmoi-managed dotfiles repositories, including
 
 ## References
 - `references/setup-script-pattern.md` — Detailed structure and best practices for the two-phase setup scripts (established in computer-setup repo work).
+
+## Hermes Agent Integration
+
+When the user wants to version-control their Hermes Agent setup (config + skills) inside a Chezmoi dotfiles repo:
+
+1. Use `chezmoi add ~/.hermes/config.yaml` (becomes `private_dot_hermes/private_config.yaml`).
+2. Use `chezmoi add ~/.hermes/skills` to include the entire skills library (creates `private_dot_hermes/skills/`).
+3. Never commit `~/.hermes/.env` — it is automatically excluded by Chezmoi's private_ prefix and should stay out of `.chezmoiignore` only if you want it ignored explicitly.
+4. After adding, commit from the Chezmoi source: `cd ~/.local/share/chezmoi && git add private_dot_hermes && git commit -m "feat: add Hermes Agent config and skills"`.
+5. On other machines: `chezmoi update -v` will restore the config and skills.
+
+**Pitfall**: The skills directory is large (~500 files). Only do a full `chezmoi add ~/.hermes/skills` when the user explicitly asks to back up the entire agent state. For lighter backups, selectively add only high-value skills or pin them via the curator.
+
+This pattern was validated in the 2026-05-16 session with the user's `computer-setup` repo.
