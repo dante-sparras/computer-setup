@@ -10,8 +10,25 @@
 #
 # Strict separation: Windows UI/WSL bootstrap in setup.ps1; all Linux/WSL CLI in setup.sh
 #
+# One-liner usage (recommended):
+#   curl -fsSL https://raw.githubusercontent.com/dante-sparras/computer-setup/main/setup.sh | bash
+#
 # Usage: ./setup.sh
 # =============================================================================
+
+# --- Bootstrap support for curl | bash one-liner ---
+if [[ "${BASH_SOURCE[0]}" == "/dev/stdin" ]] || [[ "${BASH_SOURCE[0]}" == "-" ]] || [[ -z "${BASH_SOURCE[0]}" ]]; then
+    REPO_DIR="$HOME/Projects/computer-setup"
+    if [[ ! -d "$REPO_DIR" ]]; then
+        echo "Cloning computer-setup repository..."
+        git clone https://github.com/dante-sparras/computer-setup.git "$REPO_DIR" || {
+            echo "Failed to clone repository. Please clone manually."
+            exit 1
+        }
+    fi
+    cd "$REPO_DIR" || exit 1
+    exec bash "$REPO_DIR/setup.sh" "$@"
+fi
 
 set -euo pipefail
 
