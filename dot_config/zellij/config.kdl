@@ -11,9 +11,9 @@ mouse_mode true
 
 keybinds {
     normal {
-        "Ctrl h" { MoveFocus "Left"; }
-        "Ctrl l" { MoveFocus "Right"; }
-        "Ctrl j" { MoveFocus "Down"; }
-        "Ctrl k" { MoveFocus "Up"; }
+        bind "Ctrl h" { MoveFocus "left"; }
+        bind "Ctrl l" { MoveFocus "right"; }
+        bind "Ctrl j" { MoveFocus "down"; }
+        bind "Ctrl k" { MoveFocus "up"; }
     }
 }
