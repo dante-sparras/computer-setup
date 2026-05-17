@@ -234,3 +234,17 @@ elif command -v code.exe >/dev/null 2>&1; then
   export EDITOR="code.exe --wait"
   export VISUAL="$EDITOR"
 fi
+
+# =============================================================================
+# Zellij
+# =============================================================================
+
+# Quick zellij helper: attach or create session (defaults to "main")
+z() {
+    local session="${1:-main}"
+    if zellij list-sessions 2>/dev/null | grep -q "^$session"; then
+        zellij attach "$session"
+    else
+        zellij attach -c "$session"
+    fi
+}
