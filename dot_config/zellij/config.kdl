@@ -31,6 +31,10 @@ keybinds {
         bind "Alt Shift Right" { Resize "Increase Right"; }
         bind "Alt Shift Up" { Resize "Increase Up"; }
         bind "Alt Shift Down" { Resize "Increase Down"; }
+
+        // Prevent Ctrl+Backspace from being intercepted by Zellij
+        // so it can be used for backward-kill-word in the shell
+        unbind "Ctrl Backspace"
     }
 
     locked {
