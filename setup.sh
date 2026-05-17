@@ -100,6 +100,7 @@ install_chezmoi() {
 }
 
 install_cli_tools() {
+
     log "Installing modern CLI tools (eza, bat, ripgrep, fd, zsh, zellij, etc.)..."
 
     case "$OS" in
@@ -214,6 +215,35 @@ restore_hermes() {
 # Main
 # =============================================================================
 
+# =============================================================================
+# Zellij Plugins
+# =============================================================================
+
+install_zellij_plugins() {
+    log "Installing Zellij plugins (zjstatus)..."
+
+    local plugin_dir="$HOME/.config/zellij/plugins"
+    local plugin_file="$plugin_dir/zjstatus.wasm"
+    local latest_url="https://github.com/dj95/zjstatus/releases/latest/download/zjstatus.wasm"
+
+    mkdir -p "$plugin_dir"
+
+    if [[ -f "$plugin_file" ]]; then
+        log "zjstatus.wasm already present, skipping download"
+    else
+        log "Downloading latest zjstatus.wasm..."
+        if command -v curl >/dev/null 2>&1; then
+            curl -sL "$latest_url" -o "$plugin_file" || {
+                warn "Failed to download zjstatus.wasm"
+                return 0
+            }
+            success "zjstatus.wasm installed"
+        else
+            warn "curl not found, cannot download zjstatus"
+        fi
+    fi
+}
+
 main() {
     echo "╔════════════════════════════════════════════════════════════╗"
     echo "║         computer-setup - Full Environment Bootstrap        ║"
@@ -223,6 +253,7 @@ main() {
     detect_os
     install_chezmoi
     install_cli_tools
+    install_zellij_plugins
     setup_wsl_specific
     setup_shell
 
