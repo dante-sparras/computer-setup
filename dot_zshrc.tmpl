@@ -126,3 +126,39 @@ if command -v oh-my-posh >/dev/null 2>&1; then
   fi
   unset omp_config
 fi
+
+# =============================================================================
+# Yazi
+# =============================================================================
+
+# Open Yazi and cd into the directory you exit from
+y() {
+    local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+    yazi "$@" --cwd-file="$tmp"
+    if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+        builtin cd -- "$cwd"
+    fi
+    rm -f -- "$tmp"
+}
+
+# One-time Yazi plugin bootstrap (safe to run multiple times)
+_yazi_ensure_plugins() {
+    local marker="$HOME/.local/share/yazi/plugins_installed"
+    if [[ ! -f "$marker" ]]; then
+        if command -v ya >/dev/null 2>&1; then
+            echo "Installing Yazi plugins..."
+            ya pkg install yazi-rs/plugins:smart-enter \
+                           yazi-rs/plugins:smart-paste \
+                           yazi-rs/plugins:zoxide \
+                           yazi-rs/plugins:git \
+                           yazi-rs/plugins:full-border 2>/dev/null || true
+            mkdir -p "$(dirname "$marker")"
+            touch "$marker"
+        fi
+    fi
+}
+
+# Run plugin check once per shell session (non-blocking)
+if command -v yazi >/dev/null 2>&1; then
+    _yazi_ensure_plugins &!
+fi
