@@ -125,15 +125,6 @@ install_cli_tools() {
 
     fi
 
-    # WSL → Windows default browser wrapper
-    if [[ "$OS" == "wsl" ]]; then
-        if [ -f "$HOME/.local/bin/browser" ]; then
-            log "WSL browser wrapper already installed"
-        else
-            log "Installing WSL browser wrapper (opens Windows default browser)..."
-            cp "$REPO_DIR/bin/browser" "$HOME/.local/bin/browser" 2>/dev/null || \
-            install -m 755 "$REPO_DIR/bin/browser" "$HOME/.local/bin/browser"
-            success "Browser wrapper installed at ~/.local/bin/browser"
         fi
     fi
 }

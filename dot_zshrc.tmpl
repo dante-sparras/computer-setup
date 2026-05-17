@@ -116,4 +116,15 @@ if command -v oh-my-posh >/dev/null 2>&1; then
 fi
 
 # Use Windows default browser from WSL (via computer-setup wrapper)
-export BROWSER="$HOME/.local/bin/browser"
+
+# Open URLs in Windows default browser (works from WSL)
+browser() {
+  if [ $# -eq 0 ]; then
+    echo "Usage: browser <url>"
+    return 1
+  fi
+  for url in "$@"; do
+    powershell.exe -NoProfile -Command "Start-Process '$url'" 2>/dev/null || \
+    cmd.exe /c start "" "$url" 2>/dev/null
+  done
+}
