@@ -263,12 +263,19 @@ if [[ -z "$ZELLIJ" ]] && [[ "$TERM" != "dumb" ]]; then
 fi
 
 # =============================================================================
+
+# =============================================================================
 # Keybindings
 # =============================================================================
 
-# Ctrl + Left/Right Arrow → move by word
+# Word navigation with Ctrl + Arrow
 bindkey '^[[1;5C' forward-word
 bindkey '^[[1;5D' backward-word
 
-# Ctrl + Backspace → delete previous word
-bindkey '^H' backward-kill-word
+# Word deletion
+bindkey '^W' backward-kill-word          # Ctrl+W (standard Unix word kill)
+
+# Ensure normal Backspace works reliably
+# (some terminals send ^H for Backspace, others send ^?)
+bindkey '^?' backward-delete-char
+bindkey '^H' backward-delete-char
