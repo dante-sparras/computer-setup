@@ -18,6 +18,6 @@ image_quality = 75
 
 [opener]
 edit = [
-  { run = 'cmd.exe /c code-insiders "%1"', block = true, desc = "VS Code Insiders" },
-  { run = 'cmd.exe /c code "%1"',        block = true, desc = "VS Code" },
+  { run = 'powershell.exe -Command "Start-Process code-insiders -ArgumentList \"%1\""', block = true, desc = "VS Code Insiders" },
+  { run = 'powershell.exe -Command "Start-Process code -ArgumentList \"%1\""',        block = true, desc = "VS Code" },
 ]

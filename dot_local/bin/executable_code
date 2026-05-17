@@ -1,0 +1,23 @@
+#!/bin/bash
+# Smart VS Code wrapper for WSL
+# Tries Linux CLI binaries first (more reliable from Yazi/Zellij), then falls back to Windows .exe
+
+# VS Code Insiders (Linux binary)
+if [ -x "/mnt/c/Users/$USER/AppData/Local/Programs/Microsoft VS Code Insiders/bin/code-insiders" ]; then
+    exec "/mnt/c/Users/$USER/AppData/Local/Programs/Microsoft VS Code Insiders/bin/code-insiders" "$@"
+fi
+
+# Regular VS Code (Linux binary)
+if [ -x "/mnt/c/Users/$USER/AppData/Local/Programs/Microsoft VS Code/bin/code" ]; then
+    exec "/mnt/c/Users/$USER/AppData/Local/Programs/Microsoft VS Code/bin/code" "$@"
+fi
+
+# Fallback to Windows executables
+if command -v code-insiders.exe >/dev/null 2>&1; then
+    exec code-insiders.exe "$@"
+elif command -v code.exe >/dev/null 2>&1; then
+    exec code.exe "$@"
+fi
+
+echo "Error: Could not find VS Code or VS Code Insiders" >&2
+exit 127
