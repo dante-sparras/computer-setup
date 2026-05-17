@@ -66,8 +66,13 @@ git commit -m "Your commit message"
 git push
 ```
 
-## Hermes Agent Backups (Proton Drive)
-
 Hermes Agent data is automatically backed up daily to Proton Drive using rclone.
 
 See the script header in `setup.sh` for the full two-phase pattern and separation between Windows and Linux/WSL responsibilities.
+## Hermes Agent Backups (Proton Drive)
+
+Hermes Agent configuration and data are **not** stored in this repository.
+
+Instead, they are backed up daily to Proton Drive using `rclone`. On a fresh machine, you can restore them by running the optional Phase 3 in `setup.sh` (it uses the `proton` rclone remote).
+
+This approach keeps sensitive Hermes state (API keys, sessions, skills, etc.) out of version control.
