@@ -1,5 +1,5 @@
 // Zellij configuration
-// Theme: onedark (matches common editor themes)
+// Theme: onedark
 
 theme "onedark"
 
@@ -11,11 +11,23 @@ mouse_mode true
 
 keybinds {
     normal {
-        // Use Alt + hjkl for pane navigation to avoid conflicts
-        // with shell shortcuts like Ctrl+H (used by Ctrl+Backspace)
+        // === Pane Navigation (Alt + hjkl) ===
         bind "Alt h" { MoveFocus "left"; }
         bind "Alt l" { MoveFocus "right"; }
         bind "Alt j" { MoveFocus "down"; }
         bind "Alt k" { MoveFocus "up"; }
+
+        // === Resize Panes (Alt + Shift + hjkl) ===
+        bind "Alt Shift h" { Resize "Increase Left"; }
+        bind "Alt Shift l" { Resize "Increase Right"; }
+        bind "Alt Shift j" { Resize "Increase Down"; }
+        bind "Alt Shift k" { Resize "Increase Up"; }
+
+        // === Close Pane ===
+        bind "Alt q" { CloseFocus; }
+
+        // === Split Panes ===
+        bind "Alt |" { NewPane "Right"; }   // vertical split
+        bind "Alt -" { NewPane "Down"; }    // horizontal split
     }
 }
