@@ -39,6 +39,19 @@ browser() {
   done
 }
 
+
+# Smart code command - prefers VS Code Insiders, falls back to regular VS Code
+code() {
+  if command -v code-insiders >/dev/null 2>&1; then
+    code-insiders "$@"
+  elif command -v code >/dev/null 2>&1; then
+    code "$@"
+  else
+    echo "Neither VS Code Insiders nor regular VS Code found in PATH."
+    return 1
+  fi
+}
+
 {{- end }}
 
 # =============================================================================
