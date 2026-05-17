@@ -276,3 +276,20 @@ bindkey '^W' backward-kill-word         # Ctrl + W (fallback)
 
 # Normal single-character Backspace
 bindkey '^?' backward-delete-char
+
+# =============================================================================
+# Utility Functions
+# =============================================================================
+
+# Reload Zsh configuration
+reload() {
+    if [[ -f "$HOME/.zshrc" ]]; then
+        source "$HOME/.zshrc"
+        echo "✓ Zsh configuration reloaded"
+    else
+        echo "✗ No .zshrc file found"
+    fi
+}
+
+# Alias for quick access
+alias rl='reload'
