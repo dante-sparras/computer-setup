@@ -1,4 +1,4 @@
-// Zellij + zjstatus with One Dark theme
+// Zellij configuration with zjstatus (Simple theme from official example)
 
 theme "onedark"
 
@@ -18,26 +18,28 @@ plugins {
 }
 
 load_zjstatus {
-    format_left  "#[fg=#61afef,bg=#282c34,bold]{mode}#[fg=#abb2bf,bg=#282c34] {session}"
-    format_center "#[fg=#abb2bf,bg=#282c34] {tabs}"
-    format_right  "#[fg=#5c6370,bg=#282c34] {datetime} "
+    hide_frame_for_single_pane true
 
-    mode_normal "#[bg=#61afef,fg=#282c34] NORMAL "
-    mode_tmux   "#[bg=#e5c07b,fg=#282c34] TMUX "
-    mode_pane   "#[bg=#c678dd,fg=#282c34] PANE "
-    mode_tab    "#[bg=#98c379,fg=#282c34] TAB "
-    mode_resize "#[bg=#e06c75,fg=#282c34] RESIZE "
-    mode_scroll "#[bg=#56b6c2,fg=#282c34] SCROLL "
-    mode_locked "#[bg=#5c6370,fg=#282c34] LOCKED "
+    format_left  "{mode}#[fg=#89B4FA,bg=#181825,bold] {session}#[bg=#181825] {tabs}"
+    format_right "{datetime}"
+    format_space "#[bg=#181825]"
 
-    tab_normal "#[fg=#5c6370,bg=#282c34] {index} {name} "
-    tab_active "#[fg=#abb2bf,bg=#282c34,bold] {index} {name} "
+    mode_normal          "#[bg=#89B4FA] "
+    mode_tmux            "#[bg=#ffc387] "
+    mode_default_to_mode "tmux"
 
-    datetime "#[fg=#abb2bf,bg=#282c34] {format} "
-    datetime_format "%H:%M %d-%b"
+    tab_normal               "#[fg=#6C7086,bg=#181825] {index} {name} {fullscreen_indicator}{sync_indicator}{floating_indicator}"
+    tab_active               "#[fg=#9399B2,bg=#181825,bold,italic] {index} {name} {fullscreen_indicator}{sync_indicator}{floating_indicator}"
+    tab_fullscreen_indicator "□ "
+    tab_sync_indicator       "  "
+    tab_floating_indicator   "󰉈 "
+
+    datetime          "#[fg=#9399B2,bg=#181825] {format} "
+    datetime_format   "%A, %d %b %Y %H:%M"
+    datetime_timezone "Europe/Berlin"
 }
 
-// Navigation keybinds (Lightning style)
+// Lightning navigation keybinds
 keybinds {
     shared {
         bind "Alt n" { NewPane; }
