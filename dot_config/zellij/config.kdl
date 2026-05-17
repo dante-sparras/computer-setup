@@ -6,22 +6,45 @@ theme "onedark"
 default_layout "compact"
 default_shell "zsh"
 
+pane_frames false
+simplified_ui true
 copy_on_select true
 mouse_mode true
 
 keybinds {
+    shared {
+        // Lightning navigation — everywhere
+        bind "Alt n" "Alt Enter" { NewPane; }
+        bind "Alt h" "Alt Left"  { MoveFocusOrTab "Left"; }
+        bind "Alt l" "Alt Right" { MoveFocusOrTab "Right"; }
+        bind "Alt j" "Alt Down"  { MoveFocus "Down"; }
+        bind "Alt k" "Alt Up"    { MoveFocus "Up"; }
+        bind "Alt f"             { ToggleFloatingPanes; }
+        bind "Alt m"             { TogglePaneEmbedOrFloating; }
+        bind "Alt t"             { NewTab; }
+        bind "Alt x"             { CloseFocus; }  // Quick kill
+    }
+
+    locked {
+        bind "Ctrl g" { SwitchToMode "Normal"; }
+        bind "Ctrl Shift f" { ToggleFocusFullscreen; SwitchToMode "Locked"; }  // Power fullscreen
+    }
+
     normal {
-        // Resize panes
-        bind "Alt Shift h" { Resize "Left"; }
-        bind "Alt Shift j" { Resize "Down"; }
-        bind "Alt Shift k" { Resize "Up"; }
-        bind "Alt Shift l" { Resize "Right"; }
+        bind "Ctrl g" { SwitchToMode "Locked"; }
+        bind "Ctrl p" { SwitchToMode "Pane"; }
+        bind "Ctrl t" { SwitchToMode "Tab"; }
+        bind "Ctrl n" { SwitchToMode "Resize"; }
+        bind "Ctrl o" { SwitchToMode "Session"; }
+        bind "Ctrl s" { SwitchToMode "Scroll"; }
+    }
 
-        // Close pane
-        bind "Alt q" { CloseFocus; }
-
-        // Split panes - easier shortcuts
-        bind "Alt h" { NewPane "Down"; }     // Horizontal split
-        bind "Alt v" { NewPane "Right"; }    // Vertical split
+    pane {
+        bind "n" "d" { NewPane "Down"; }
+        bind "r"     { NewPane "Right"; }
+        bind "x"     { CloseFocus; }
+        bind "f"     { ToggleFocusFullscreen; }
+        bind "h j k l" { MoveFocus; }  // Clean hjkl
+        bind "p"     { SwitchFocus; }
     }
 }
