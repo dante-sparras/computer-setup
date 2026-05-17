@@ -1,164 +1,41 @@
-{{- if .is_wsl }}
-# =============================================================================
-# WSL (Windows Subsystem for Linux)
-# =============================================================================
-
-# Aliases
-
-alias cdc='cd /mnt/c'
-alias cdd='cd /mnt/d'
-
-# Functions
-
-win() {
-  local user_profile
-  if command -v powershell.exe >/dev/null 2>&1 && command -v wslpath >/dev/null 2>&1; then
-    user_profile="$(powershell.exe -NoProfile -Command '[Environment]::GetFolderPath("UserProfile")' 2>/dev/null | tr -d '\r')"
-    if [[ -n "$user_profile" ]]; then
-      cd "$(wslpath "$user_profile")" || return
-      return
-    fi
-  fi
-  cd "/mnt/c/Users/$USER" || return
-}
-
-exp() {
-  command -v explorer.exe >/dev/null 2>&1 || { print "explorer.exe not found"; return 1; }
-  explorer.exe "${1:-.}" >/dev/null 2>&1 &
-}
-
-# Open URLs in Windows default browser
-browser() {
-  if [ $# -eq 0 ]; then
-    echo "Usage: browser <url>"
-    return 1
-  fi
-  for url in "$@"; do
-    powershell.exe -NoProfile -Command "Start-Process '$url'" 2>/dev/null || \
-    cmd.exe /c start "" "$url" 2>/dev/null
-  done
-}
-
-{{- end }}
-# =============================================================================
-# Functions
-# =============================================================================
-
-update() {
-  if command -v dnf >/dev/null 2>&1; then
-    sudo dnf upgrade --refresh -y
-  elif command -v apt >/dev/null 2>&1; then
-    sudo apt update && sudo apt upgrade -y
-  elif command -v pacman >/dev/null 2>&1; then
-    sudo pacman -Syu --noconfirm
-  else
-    echo "No supported package manager found."
-  fi
-
-  if command -v npm >/dev/null 2>&1; then
-    npm update -g
-  fi
-
-  if command -v bun >/dev/null 2>&1; then
-    bun update -g || true
-  fi
-
-  hash -r 2>/dev/null || true
-}
-
-# =============================================================================
-# Aliases
-# =============================================================================
-
-alias ..='cd ..'
-alias ...='cd ../..'
-
-if command -v eza >/dev/null 2>&1; then
-  alias ls='eza --icons --git --group-directories-first'
-  alias ll='eza -l --icons --git --group-directories-first'
-  alias la='eza -la --icons --git --group-directories-first'
-fi
-
-if command -v bat >/dev/null 2>&1; then
-  alias cat='bat --paging=never --style=plain'
-fi
-
-if command -v rg >/dev/null 2>&1; then
-  alias grep='rg'
-fi
-
-if command -v fd >/dev/null 2>&1; then
-  alias find='fd'
-fi
-
-if command -v btop >/dev/null 2>&1; then
-  alias top='btop'
-fi
-
-if command -v fastfetch >/dev/null 2>&1; then
-  alias sysinfo='fastfetch'
-fi
-
-# =============================================================================
-# Environment Variables
-# =============================================================================
-
-export PATH="$HOME/.local/bin:$PATH"
-
-# =============================================================================
-# Initialization
-# =============================================================================
-
-if command -v zoxide >/dev/null 2>&1; then
-  eval "$(zoxide init zsh --cmd cd)"
-fi
-
-if command -v fzf >/dev/null 2>&1; then
-  source <(fzf --zsh)
-fi
-
-if command -v oh-my-posh >/dev/null 2>&1; then
-  omp_config="$HOME/.config/oh-my-posh/config.toml"
-  if [[ -f "$omp_config" ]]; then
-    eval "$(oh-my-posh init zsh --config "$omp_config")"
-  else
-    eval "$(oh-my-posh init zsh)"
-  fi
-  unset omp_config
-fi
-
-# =============================================================================
-# Yazi
-# =============================================================================
-
-# Open Yazi and cd into the directory you exit from
-y() {
-    local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
-    yazi "$@" --cwd-file="$tmp"
-    if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
-        builtin cd -- "$cwd"
-    fi
-    rm -f -- "$tmp"
-}
-
-# One-time Yazi plugin bootstrap (safe to run multiple times)
-_yazi_ensure_plugins() {
-    local marker="$HOME/.local/share/yazi/plugins_installed"
-    if [[ ! -f "$marker" ]]; then
-        if command -v ya >/dev/null 2>&1; then
-            echo "Installing Yazi plugins..."
-            ya pkg install yazi-rs/plugins:smart-enter \
-                           yazi-rs/plugins:smart-paste \
-                           yazi-rs/plugins:zoxide \
-                           yazi-rs/plugins:git \
-                           yazi-rs/plugins:full-border 2>/dev/null || true
-            mkdir -p "$(dirname "$marker")"
-            touch "$marker"
-        fi
-    fi
-}
-
 # Run plugin check once per shell session (non-blocking)
 if command -v yazi >/dev/null 2>&1; then
     _yazi_ensure_plugins &!
 fi
+
+# =============================================================================
+# Completion System
+# =============================================================================
+
+autoload -Uz compinit
+
+# Use a cache file for faster startup
+if [[ -n ${XDG_CACHE_HOME:-} ]]; then
+  compinit -d "${XDG_CACHE_HOME}/zcompdump"
+else
+  compinit -d "${HOME}/.zcompdump"
+fi
+
+# Completion styling
+zstyle ':completion:*' menu select                          # Use menu selection
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'   # Case-insensitive matching
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}       # Use LS_COLORS for colored completions
+zstyle ':completion:*' group-name ''                        # Group completions by type
+zstyle ':completion:*:descriptions' format '%F{yellow}-- %d --%f'
+zstyle ':completion:*:messages' format '%F{purple}-- %d --%f'
+zstyle ':completion:*:warnings' format '%F{red}-- no matches found --%f'
+
+# Better completion for common commands
+zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
+zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
+
+# Enable approximate matching
+zstyle ':completion:*' completer _complete _approximate
+zstyle ':completion:*:approximate:*' max-errors 2
+
+# Ignore certain patterns
+zstyle ':completion:*' ignored-patterns '*~' '*.swp' '*.o' '*.pyc'
+
+# Use caching
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*' cache-path "${XDG_CACHE_HOME:-$HOME/.cache}/zcompcache"
