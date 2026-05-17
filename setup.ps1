@@ -10,12 +10,27 @@
 
 $ErrorActionPreference = "Stop"
 
+# Bootstrap support for irm | iex one-liner
+if ($MyInvocation.MyCommand.Path -eq $null -or $MyInvocation.MyCommand.Path -eq "") {
+    Write-Host "Running via remote execution (irm | iex)..." -ForegroundColor Cyan
+    
+    $repoPath = "$env:USERPROFILE\Projects\computer-setup"
+    
+    if (-not (Test-Path $repoPath)) {
+        Write-Host "Cloning computer-setup repository..." -ForegroundColor Blue
+        git clone https://github.com/dante-sparras/computer-setup.git $repoPath
+    }
+    
+    Set-Location $repoPath
+    & "$repoPath\setup.ps1"
+    return
+}
+
 function Write-Phase { param([string]$Text) Write-Host "`n=== $Text ===" -ForegroundColor Cyan }
 function Write-Info  { param([string]$Text) Write-Host "[INFO] $Text" -ForegroundColor Blue }
 function Write-Success { param([string]$Text) Write-Host "[SUCCESS] $Text" -ForegroundColor Green }
 function Write-Warn  { param([string]$Text) Write-Host "[WARN] $Text" -ForegroundColor Yellow }
 function Write-ErrorMsg { param([string]$Text) Write-Host "[ERROR] $Text" -ForegroundColor Red; exit 1 }
-
 # =============================================================================
 # PHASE 1: Windows Environment Setup
 # =============================================================================

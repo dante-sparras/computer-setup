@@ -18,7 +18,7 @@ This single command will:
 
 **Windows (PowerShell)**
 ```powershell
-git clone https://github.com/dante-sparras/computer-setup.git "$env:USERPROFILE\Projects\computer-setup" && cd "$env:USERPROFILE\Projects\computer-setup" && .\setup.ps1
+irm https://raw.githubusercontent.com/dante-sparras/computer-setup/main/setup.ps1 | iex
 ```
 
 > **Note**: `setup.ps1` handles Windows UI apps, settings, and WSL Fedora bootstrap. All CLI tools run via the Linux/WSL `setup.sh`.
