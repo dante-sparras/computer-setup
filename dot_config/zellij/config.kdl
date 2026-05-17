@@ -1,5 +1,4 @@
-// Zellij configuration
-// Theme: onedark
+// Zellij configuration with zjstatus (One Dark theme)
 
 theme "onedark"
 
@@ -8,26 +7,66 @@ default_shell "zsh"
 
 pane_frames false
 simplified_ui true
+
 copy_on_select true
 mouse_mode true
 
+plugins {
+    zjstatus {
+        location "file:~/.config/zellij/plugins/zjstatus/zjstatus.wasm"
+    }
+}
+
+load_zjstatus {
+    // Status bar format
+    format_left   "{mode} {tabs}"
+    format_center ""
+    format_right  "{datetime}"
+    format_space  ""
+
+    // Mode indicators (One Dark colors)
+    mode_normal "#[bg=#50fa7b,fg=#282a36,bold] NORMAL "
+    mode_tmux   "#[bg=#bd93f9,fg=#282a36,bold] TMUX "
+    mode_locked "#[bg=#ff5555,fg=#f8f8f2,bold] LOCKED "
+    mode_resize "#[bg=#ffb86c,fg=#282a36,bold] RESIZE "
+    mode_pane   "#[bg=#8be9fd,fg=#282a36,bold] PANE "
+    mode_tab    "#[bg=#ff79c6,fg=#282a36,bold] TAB "
+    mode_scroll "#[bg=#f1fa8c,fg=#282a36,bold] SCROLL "
+
+    // Tab styling
+    tab_normal   "#[bg=#44475a,fg=#f8f8f2] {name} "
+    tab_active   "#[bg=#bd93f9,fg=#282a36,bold] {name} "
+
+    // Datetime
+    datetime "#[fg=#6272a4] {format} " {
+        format "%Y-%m-%d %H:%M"
+    }
+}
+
+// Navigation keybinds (Lightning style)
 keybinds {
     shared {
-        // Lightning navigation — everywhere
-        bind "Alt n" "Alt Enter" { NewPane; }
-        bind "Alt h" "Alt Left"  { MoveFocusOrTab "Left"; }
-        bind "Alt l" "Alt Right" { MoveFocusOrTab "Right"; }
-        bind "Alt j" "Alt Down"  { MoveFocus "Down"; }
-        bind "Alt k" "Alt Up"    { MoveFocus "Up"; }
-        bind "Alt f"             { ToggleFloatingPanes; }
-        bind "Alt m"             { TogglePaneEmbedOrFloating; }
-        bind "Alt t"             { NewTab; }
-        bind "Alt x"             { CloseFocus; }  // Quick kill
+        bind "Alt n" { NewPane; }
+        bind "Alt Enter" { NewPane; }
+        bind "Alt x" { CloseFocus; }
+        bind "Alt q" { CloseFocus; }
+
+        bind "Alt Left" { MoveFocus "left"; }
+        bind "Alt Right" { MoveFocus "right"; }
+        bind "Alt Up" { MoveFocus "up"; }
+        bind "Alt Down" { MoveFocus "down"; }
+
+        bind "Alt h" { NewPane "down"; }
+        bind "Alt v" { NewPane "right"; }
+
+        bind "Alt Shift Left" { Resize "Increase Left"; }
+        bind "Alt Shift Right" { Resize "Increase Right"; }
+        bind "Alt Shift Up" { Resize "Increase Up"; }
+        bind "Alt Shift Down" { Resize "Increase Down"; }
     }
 
     locked {
         bind "Ctrl g" { SwitchToMode "Normal"; }
-        bind "Ctrl Shift f" { ToggleFocusFullscreen; SwitchToMode "Locked"; }  // Power fullscreen
     }
 
     normal {
@@ -40,11 +79,16 @@ keybinds {
     }
 
     pane {
-        bind "n" "d" { NewPane "Down"; }
-        bind "r"     { NewPane "Right"; }
-        bind "x"     { CloseFocus; }
-        bind "f"     { ToggleFocusFullscreen; }
-        bind "h j k l" { MoveFocus; }  // Clean hjkl
-        bind "p"     { SwitchFocus; }
+        bind "h" { MoveFocus "left"; }
+        bind "j" { MoveFocus "down"; }
+        bind "k" { MoveFocus "up"; }
+        bind "l" { MoveFocus "right"; }
+        bind "Ctrl p" { SwitchToMode "Normal"; }
+    }
+
+    tab {
+        bind "h" { GoToPreviousTab; }
+        bind "l" { GoToNextTab; }
+        bind "Ctrl t" { SwitchToMode "Normal"; }
     }
 }
