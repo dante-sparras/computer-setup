@@ -12,7 +12,7 @@ curl -fsSL https://raw.githubusercontent.com/dante-sparras/computer-setup/main/s
 
 This single command will:
 - Clone the repository (if needed)
-- Install Chezmoi + modern CLI tools (including Notion CLI `ntn`)
+- Install Chezmoi + modern CLI tools
 - Apply all dotfiles
 - Set up your environment
 
