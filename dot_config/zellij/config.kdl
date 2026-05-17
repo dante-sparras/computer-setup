@@ -11,9 +11,11 @@ mouse_mode true
 
 keybinds {
     normal {
-        bind "Ctrl h" { MoveFocus "left"; }
-        bind "Ctrl l" { MoveFocus "right"; }
-        bind "Ctrl j" { MoveFocus "down"; }
-        bind "Ctrl k" { MoveFocus "up"; }
+        // Use Alt + hjkl for pane navigation to avoid conflicts
+        // with shell shortcuts like Ctrl+H (used by Ctrl+Backspace)
+        bind "Alt h" { MoveFocus "left"; }
+        bind "Alt l" { MoveFocus "right"; }
+        bind "Alt j" { MoveFocus "down"; }
+        bind "Alt k" { MoveFocus "up"; }
     }
 }
