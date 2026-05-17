@@ -114,3 +114,6 @@ if command -v oh-my-posh >/dev/null 2>&1; then
   fi
   unset omp_config
 fi
+
+# Use Windows default browser from WSL (via computer-setup wrapper)
+export BROWSER="$HOME/.local/bin/browser"

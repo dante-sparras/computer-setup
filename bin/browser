@@ -1,0 +1,19 @@
+#!/bin/bash
+# Open URLs using the default Windows browser from WSL
+# Respects whatever browser the user has set as default in Windows (Helium, Chrome, Edge, etc.)
+
+if [ $# -eq 0 ]; then
+    echo "Usage: browser <url> [url2] ..."
+    exit 1
+fi
+
+for url in "$@"; do
+    # Use PowerShell to launch the default browser
+    if command -v powershell.exe >/dev/null 2>&1; then
+        powershell.exe -NoProfile -Command "Start-Process '$url'" 2>/dev/null
+    elif command -v cmd.exe >/dev/null 2>&1; then
+        cmd.exe /c start "" "$url" 2>/dev/null
+    else
+        echo "Failed to open: $url (no PowerShell or cmd.exe found)"
+    fi
+done
