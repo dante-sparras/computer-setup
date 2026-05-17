@@ -18,6 +18,5 @@ image_quality = 75
 
 [opener]
 edit = [
-  { run = 'cmd.exe /c start "" "code-insiders" "%1"', block = false, desc = "VS Code Insiders" },
-  { run = 'cmd.exe /c start "" "code" "%1"',        block = false, desc = "VS Code" },
+  { run = 'code "$1"', block = false, desc = "VS Code" },
 ]
