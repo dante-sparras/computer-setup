@@ -152,7 +152,8 @@ _yazi_ensure_plugins() {
                            yazi-rs/plugins:smart-paste \
                            yazi-rs/plugins:zoxide \
                            yazi-rs/plugins:git \
-                           yazi-rs/plugins:full-border 2>/dev/null || true
+                           yazi-rs/plugins:full-border \
+                           BennyOe/onedark 2>/dev/null || true
             mkdir -p "$(dirname "$marker")"
             touch "$marker"
         fi
