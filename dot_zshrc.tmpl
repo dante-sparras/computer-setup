@@ -249,12 +249,15 @@ z() {
     fi
 }
 
-# =============================================================================
-# Auto-start Zellij (optional)
-# =============================================================================
-# Uncomment the block below if you want Zellij to start automatically
-# when opening a new terminal (only if not already inside Zellij).
 
-#if [[ -z "$ZELLIJ" ]] && [[ "$TERM" != "dumb" ]]; then
-#    zellij attach -c main
-#fi
+# =============================================================================
+# Auto-start Zellij on shell launch
+# =============================================================================
+# Starts Zellij automatically when opening a new terminal.
+# - Only if not already inside a Zellij session ($ZELLIJ is unset)
+# - Skips dumb/non-interactive terminals
+# - Defaults to session "main"
+
+if [[ -z "$ZELLIJ" ]] && [[ "$TERM" != "dumb" ]]; then
+    zellij attach -c main
+fi
