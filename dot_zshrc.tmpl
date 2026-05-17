@@ -201,3 +201,14 @@ zstyle ':completion:*' ignored-patterns '*~' '*.swp' '*.o' '*.pyc'
 # Use caching
 zstyle ':completion:*' use-cache on
 zstyle ':completion:*' cache-path "${XDG_CACHE_HOME:-$HOME/.cache}/zcompcache"
+# Smart code command - prefers VS Code Insiders, falls back to regular VS Code
+code() {
+  if command -v code-insiders.exe >/dev/null 2>&1; then
+    code-insiders.exe "$@"
+  elif command -v code.exe >/dev/null 2>&1; then
+    code.exe "$@"
+  else
+    echo "Neither VS Code Insiders nor regular VS Code found in PATH."
+    return 1
+  fi
+}
