@@ -3,7 +3,7 @@
 # computer-setup - Universal Environment Setup Script
 # =============================================================================
 # This script follows the established two-phase bootstrap pattern:
-#   PHASE 1: Bootstrap base environment (OS detection, Chezmoi, CLI tools incl. Notion ntn)
+#   PHASE 1: Bootstrap base environment (OS detection, Chezmoi, CLI tools)
 #   PHASE 2: Apply dotfiles with Chezmoi
 #
 # Optional: Hermes Agent restore from Proton Drive (post-bootstrap)
@@ -123,12 +123,6 @@ install_cli_tools() {
             ;;
     esac
 
-    # Notion CLI (ntn) - always install via official script (idempotent)
-    if command -v ntn >/dev/null 2>&1; then
-        log "Notion CLI (ntn) already installed ($(ntn --version 2>/dev/null || echo 'unknown version'))"
-    else
-        log "Installing Notion CLI (ntn)..."
-        curl -fsSL "https://ntn.dev" | NTN_INSTALL_DIR="$HOME/.local/bin" bash || warn "Notion CLI install failed — you can run it manually later"
     fi
 
     # WSL → Windows default browser wrapper
