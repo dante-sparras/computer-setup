@@ -225,3 +225,12 @@ code() {
     return 1
   fi
 }
+
+# Set EDITOR to VS Code (Insiders preferred) with --wait for git commits etc.
+if command -v code-insiders.exe >/dev/null 2>&1; then
+  export EDITOR="code-insiders.exe --wait"
+  export VISUAL="$EDITOR"
+elif command -v code.exe >/dev/null 2>&1; then
+  export EDITOR="code.exe --wait"
+  export VISUAL="$EDITOR"
+fi
