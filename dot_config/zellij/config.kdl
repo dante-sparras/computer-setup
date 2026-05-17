@@ -5,8 +5,8 @@ theme "onedark"
 default_layout "compact"
 default_shell "zsh"
 
-pane_frames false
-simplified_ui true
+pane_frames true
+simplified_ui false
 
 copy_on_select true
 mouse_mode true
