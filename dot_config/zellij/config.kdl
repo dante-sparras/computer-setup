@@ -21,7 +21,7 @@ keybinds {
         bind "Alt q" { CloseFocus; }
 
         // Split panes - easier shortcuts
-        bind "Alt -" { NewPane "Down"; }     // Horizontal split
-        bind "Alt v" { NewPane "Right"; }    // Vertical split (easier than |)
+        bind "Alt h" { NewPane "Down"; }     // Horizontal split
+        bind "Alt v" { NewPane "Right"; }    // Vertical split
     }
 }
