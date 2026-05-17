@@ -1,219 +1,234 @@
 {
-	"$help": "https://aka.ms/terminal-documentation",
-	"$schema": "https://aka.ms/terminal-profiles-schema",
-	"actions": [
-		{
-			"command": {
-				"action": "splitPane",
-				"split": "right"
-			},
-			"id": "User.splitPane.864CD510"
-		}
-	],
-	"copyFormatting": "none",
-	"copyOnSelect": false,
-	"defaultProfile": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
-	"keybindings": [
-		{
-			"id": "Terminal.CopyToClipboard",
-			"keys": "ctrl+c"
-		},
-		{
-			"id": "Terminal.OpenNewTab",
-			"keys": "ctrl+t"
-		},
-		{
-			"id": "Terminal.FindText",
-			"keys": "ctrl+f"
-		},
-		{
-			"id": "Terminal.PasteFromClipboard",
-			"keys": "ctrl+v"
-		},
-		{
-			"id": null,
-			"keys": "ctrl+shift+f"
-		},
-		{
-			"id": null,
-			"keys": "ctrl+shift+w"
-		},
-		{
-			"id": null,
-			"keys": "ctrl+shift+3"
-		},
-		{
-			"id": "Terminal.DuplicatePaneAuto",
-			"keys": "alt+shift+d"
-		},
-		{
-			"id": "Terminal.ClosePane",
-			"keys": "ctrl+w"
-		},
-		{
-			"id": null,
-			"keys": "ctrl+alt+5"
-		},
-		{
-			"id": null,
-			"keys": "ctrl+shift+c"
-		},
-		{
-			"id": null,
-			"keys": "ctrl+shift+4"
-		},
-		{
-			"id": null,
-			"keys": "ctrl+shift+t"
-		},
-		{
-			"id": null,
-			"keys": "enter"
-		},
-		{
-			"id": "Terminal.SwitchToLastTab",
-			"keys": "ctrl+9"
-		},
-		{
-			"id": null,
-			"keys": "ctrl+shift+6"
-		},
-		{
-			"id": null,
-			"keys": "ctrl+insert"
-		},
-		{
-			"id": "Terminal.SwitchToTab2",
-			"keys": "ctrl+3"
-		},
-		{
-			"id": null,
-			"keys": "ctrl+shift+9"
-		},
-		{
-			"id": null,
-			"keys": "ctrl+shift+8"
-		},
-		{
-			"id": null,
-			"keys": "ctrl+shift+7"
-		},
-		{
-			"id": null,
-			"keys": "ctrl+shift+5"
-		},
-		{
-			"id": null,
-			"keys": "ctrl+alt+8"
-		},
-		{
-			"id": null,
-			"keys": "ctrl+shift+v"
-		},
-		{
-			"id": null,
-			"keys": "shift+insert"
-		},
-		{
-			"id": "Terminal.SwitchToTab0",
-			"keys": "ctrl+1"
-		},
-		{
-			"id": "Terminal.SwitchToTab5",
-			"keys": "ctrl+6"
-		},
-		{
-			"id": null,
-			"keys": "ctrl+alt+1"
-		},
-		{
-			"id": null,
-			"keys": "ctrl+alt+6"
-		},
-		{
-			"id": "Terminal.SwitchToTab1",
-			"keys": "ctrl+2"
-		},
-		{
-			"id": null,
-			"keys": "ctrl+alt+9"
-		},
-		{
-			"id": null,
-			"keys": "ctrl+alt+2"
-		},
-		{
-			"id": null,
-			"keys": "ctrl+alt+3"
-		},
-		{
-			"id": "Terminal.SwitchToTab3",
-			"keys": "ctrl+4"
-		},
-		{
-			"id": null,
-			"keys": "ctrl+alt+7"
-		},
-		{
-			"id": null,
-			"keys": "ctrl+alt+4"
-		},
-		{
-			"id": "Terminal.SwitchToTab4",
-			"keys": "ctrl+5"
-		},
-		{
-			"id": "Terminal.SwitchToTab6",
-			"keys": "ctrl+7"
-		},
-		{
-			"id": "Terminal.SwitchToTab7",
-			"keys": "ctrl+8"
-		},
-		{
-			"id": null,
-			"keys": "alt+enter"
-		}
-	],
-	"newTabMenu": [
-		{
-			"type": "remainingProfiles"
-		},
-		{
-			"type": "separator"
-		},
-		{
-			"type": "separator"
-		}
-	],
-	"profiles": {
-		"defaults": {
-			"colorScheme": "Campbell",
-			"elevate": false,
-			"font": {
-				"face": "GeistMono Nerd Font Mono"
-			}
-		},
-		"list": [
-			{
-				"commandline": "\"C:\\Users\\dante\\AppData\\Local\\Microsoft\\WindowsApps\\Microsoft.PowerShell_8wekyb3d8bbwe\\pwsh.exe\" -NoLogo",
-				"guid": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
-				"hidden": false,
-				"name": "PowerShell",
-				"source": "Windows.Terminal.PowershellCore",
-				"tabTitle": "PowerShell",
-				"useAcrylic": true
-			},
-			{
-				"guid": "{f3b49652-d9ca-5e8e-a0e1-b2449d4a9e9b}",
-				"hidden": false,
-				"name": "FedoraLinux-44",
-				"source": "Microsoft.WSL"
-			}
-		]
-	},
-	"schemes": [],
-	"showTabsFullscreen": true,
-	"themes": [],
-	"useAcrylicInTabRow": true
+    "$help": "https://aka.ms/terminal-documentation",
+    "$schema": "https://aka.ms/terminal-profiles-schema",
+    "actions": 
+    [
+        {
+            "command": 
+            {
+                "action": "splitPane",
+                "split": "right"
+            },
+            "id": "User.splitPane.864CD510"
+        }
+    ],
+    "copyFormatting": "none",
+    "copyOnSelect": false,
+    "defaultProfile": "{f3b49652-d9ca-5e8e-a0e1-b2449d4a9e9b}",
+    "keybindings": 
+    [
+        {
+            "id": "Terminal.CopyToClipboard",
+            "keys": "ctrl+c"
+        },
+        {
+            "id": "Terminal.OpenNewTab",
+            "keys": "ctrl+t"
+        },
+        {
+            "id": "Terminal.FindText",
+            "keys": "ctrl+f"
+        },
+        {
+            "id": "Terminal.PasteFromClipboard",
+            "keys": "ctrl+v"
+        },
+        {
+            "id": null,
+            "keys": "ctrl+shift+f"
+        },
+        {
+            "id": null,
+            "keys": "ctrl+shift+w"
+        },
+        {
+            "id": null,
+            "keys": "ctrl+shift+3"
+        },
+        {
+            "id": "Terminal.DuplicatePaneAuto",
+            "keys": "alt+shift+d"
+        },
+        {
+            "id": "Terminal.ClosePane",
+            "keys": "ctrl+w"
+        },
+        {
+            "id": null,
+            "keys": "ctrl+alt+5"
+        },
+        {
+            "id": null,
+            "keys": "ctrl+shift+c"
+        },
+        {
+            "id": null,
+            "keys": "ctrl+shift+4"
+        },
+        {
+            "id": null,
+            "keys": "ctrl+shift+t"
+        },
+        {
+            "id": null,
+            "keys": "enter"
+        },
+        {
+            "id": "Terminal.SwitchToLastTab",
+            "keys": "ctrl+9"
+        },
+        {
+            "id": null,
+            "keys": "ctrl+shift+6"
+        },
+        {
+            "id": null,
+            "keys": "ctrl+insert"
+        },
+        {
+            "id": "Terminal.SwitchToTab2",
+            "keys": "ctrl+3"
+        },
+        {
+            "id": null,
+            "keys": "ctrl+shift+9"
+        },
+        {
+            "id": null,
+            "keys": "ctrl+shift+8"
+        },
+        {
+            "id": null,
+            "keys": "ctrl+shift+7"
+        },
+        {
+            "id": null,
+            "keys": "ctrl+shift+5"
+        },
+        {
+            "id": null,
+            "keys": "ctrl+alt+8"
+        },
+        {
+            "id": null,
+            "keys": "ctrl+shift+v"
+        },
+        {
+            "id": null,
+            "keys": "shift+insert"
+        },
+        {
+            "id": "Terminal.SwitchToTab0",
+            "keys": "ctrl+1"
+        },
+        {
+            "id": "Terminal.SwitchToTab5",
+            "keys": "ctrl+6"
+        },
+        {
+            "id": null,
+            "keys": "ctrl+alt+1"
+        },
+        {
+            "id": null,
+            "keys": "ctrl+alt+6"
+        },
+        {
+            "id": "Terminal.SwitchToTab1",
+            "keys": "ctrl+2"
+        },
+        {
+            "id": null,
+            "keys": "ctrl+alt+9"
+        },
+        {
+            "id": null,
+            "keys": "ctrl+alt+2"
+        },
+        {
+            "id": null,
+            "keys": "ctrl+alt+3"
+        },
+        {
+            "id": "Terminal.SwitchToTab3",
+            "keys": "ctrl+4"
+        },
+        {
+            "id": null,
+            "keys": "ctrl+alt+7"
+        },
+        {
+            "id": null,
+            "keys": "ctrl+alt+4"
+        },
+        {
+            "id": "Terminal.SwitchToTab4",
+            "keys": "ctrl+5"
+        },
+        {
+            "id": "Terminal.SwitchToTab6",
+            "keys": "ctrl+7"
+        },
+        {
+            "id": "Terminal.SwitchToTab7",
+            "keys": "ctrl+8"
+        },
+        {
+            "id": null,
+            "keys": "alt+enter"
+        }
+    ],
+    "newTabMenu": 
+    [
+        {
+            "type": "remainingProfiles"
+        },
+        {
+            "type": "separator"
+        },
+        {
+            "type": "separator"
+        }
+    ],
+    "profiles": 
+    {
+        "defaults": 
+        {
+            "colorScheme": "Campbell",
+            "elevate": false,
+            "font": 
+            {
+                "face": "GeistMono Nerd Font Mono"
+            }
+        },
+        "list": 
+        [
+            {
+                "commandline": "\"C:\\Users\\dante\\AppData\\Local\\Microsoft\\WindowsApps\\Microsoft.PowerShell_8wekyb3d8bbwe\\pwsh.exe\" -NoLogo",
+                "guid": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
+                "hidden": false,
+                "name": "PowerShell",
+                "source": "Windows.Terminal.PowershellCore",
+                "tabTitle": "PowerShell",
+                "useAcrylic": true
+            },
+            {
+                "backgroundImage": "desktopWallpaper",
+                "backgroundImageOpacity": 0.05,
+                "backgroundImageStretchMode": "uniformToFill",
+                "experimental.retroTerminalEffect": false,
+                "guid": "{f3b49652-d9ca-5e8e-a0e1-b2449d4a9e9b}",
+                "hidden": false,
+                "intenseTextStyle": "all",
+                "name": "FedoraLinux-44",
+                "opacity": 100,
+                "source": "Microsoft.WSL",
+                "useAcrylic": true
+            }
+        ]
+    },
+    "schemes": [],
+    "showTabsFullscreen": true,
+    "themes": [],
+    "useAcrylicInTabRow": true
 }
