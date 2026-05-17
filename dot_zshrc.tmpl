@@ -131,17 +131,12 @@ if command -v fzf >/dev/null 2>&1; then
   source <(fzf --zsh)
 fi
 
-if command -v oh-my-posh >/dev/null 2>&1; then
-  omp_config="$HOME/.config/oh-my-posh/config.toml"
-  if [[ -f "$omp_config" ]]; then
-    eval "$(oh-my-posh init zsh --config "$omp_config")"
-  else
-    eval "$(oh-my-posh init zsh)"
-  fi
-  unset omp_config
-fi
 
 # =============================================================================
+if command -v starship >/dev/null 2>&1; then
+  eval "$(starship init zsh)"
+fi
+
 # Yazi
 # =============================================================================
 
