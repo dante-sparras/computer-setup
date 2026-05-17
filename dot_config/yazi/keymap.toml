@@ -1,0 +1,51 @@
+# Yazi keymap - Dante's setup
+
+[mgr]
+
+# Drop to shell
+[[mgr.prepend_keymap]]
+on   = "!"
+for  = "unix"
+run  = 'shell "$SHELL" --block'
+desc = "Open $SHELL here"
+
+# Close input with single Esc
+[[input.prepend_keymap]]
+on   = "<Esc>"
+run  = "close"
+desc = "Cancel input"
+
+# Quit
+[[mgr.prepend_keymap]]
+on   = "q"
+run  = "quit"
+desc = "Quit Yazi"
+
+[[mgr.prepend_keymap]]
+on   = "<C-q>"
+run  = "quit --no-cwd-file"
+desc = "Quit without writing cwd file"
+
+# Toggle hidden files
+[[mgr.prepend_keymap]]
+on   = "."
+run  = "hidden toggle"
+desc = "Toggle hidden files"
+
+# Go to home
+[[mgr.prepend_keymap]]
+on   = "~"
+run  = "cd ~"
+desc = "Go to home directory"
+
+# Zoxide jump
+[[mgr.prepend_keymap]]
+on   = "z"
+run  = "plugin zoxide"
+desc = "Jump to a directory using zoxide"
+
+# Fuzzy find files with fd + fzf
+[[mgr.prepend_keymap]]
+on   = "<C-f>"
+run  = 'shell "fd --type f --hidden --exclude .git | fzf --height 60% --reverse --preview \"bat --color=always --style=numbers --line-range=:500 {}\" | xargs -I {} yazi {}"'
+desc = "Fuzzy find files"

@@ -1,0 +1,3 @@
+# Use Catppuccin Mocha flavor
+[flavor]
+use = "catppuccin-mocha"
