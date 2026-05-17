@@ -1,4 +1,4 @@
-// Zellij configuration with zjstatus (One Dark theme)
+// Zellij + zjstatus with One Dark theme
 
 theme "onedark"
 
@@ -18,34 +18,23 @@ plugins {
 }
 
 load_zjstatus {
-    hide_frame_for_single_pane "true"
+    format_left  "#[fg=#61afef,bg=#282c34,bold]{mode}#[fg=#abb2bf,bg=#282c34] {session}"
+    format_center "#[fg=#abb2bf,bg=#282c34] {tabs}"
+    format_right  "#[fg=#5c6370,bg=#282c34] {datetime} "
 
-    // One Dark colors
-    format_left  "#[fg=#61afef,bg=#282c34,bold] {mode} #[fg=#abb2bf,bg=#282c34,bold]{session}#[bg=#282c34] {tabs}"
-    format_right "#[fg=#5c6370,bg=#282c34] {command_kubectx} {command_kubens}#[fg=#abb2bf,bg=#282c34] {datetime} "
-    format_space "#[bg=#282c34]"
+    mode_normal "#[bg=#61afef,fg=#282c34] NORMAL "
+    mode_tmux   "#[bg=#e5c07b,fg=#282c34] TMUX "
+    mode_pane   "#[bg=#c678dd,fg=#282c34] PANE "
+    mode_tab    "#[bg=#98c379,fg=#282c34] TAB "
+    mode_resize "#[bg=#e06c75,fg=#282c34] RESIZE "
+    mode_scroll "#[bg=#56b6c2,fg=#282c34] SCROLL "
+    mode_locked "#[bg=#5c6370,fg=#282c34] LOCKED "
 
-    mode_normal          "#[bg=#61afef,fg=#282c34] "
-    mode_tmux            "#[bg=#e5c07b,fg=#282c34] "
-    mode_default_to_mode "tmux"
+    tab_normal "#[fg=#5c6370,bg=#282c34] {index} {name} "
+    tab_active "#[fg=#abb2bf,bg=#282c34,bold] {index} {name} "
 
-    tab_normal               "#[fg=#5c6370,bg=#282c34] {index} {name} {fullscreen_indicator}{sync_indicator}{floating_indicator}"
-    tab_active               "#[fg=#abb2bf,bg=#282c34,bold,italic] {index} {name} {fullscreen_indicator}{sync_indicator}{floating_indicator}"
-    tab_fullscreen_indicator "□ "
-    tab_sync_indicator       "  "
-    tab_floating_indicator   "󰉈 "
-
-    command_kubectx_command  "kubectx -c"
-    command_kubectx_format   "#[fg=#5c6370,bg=#282c34,italic] {stdout}"
-    command_kubectx_interval "2"
-
-    command_kubens_command  "kubens -c"
-    command_kubens_format   "#[fg=#5c6370,bg=#282c34]{stdout} "
-    command_kubens_interval "2"
-
-    datetime          "#[fg=#abb2bf,bg=#282c34] {format} "
-    datetime_format   "%a %d %b %H:%M"
-    datetime_timezone "Europe/Berlin"
+    datetime "#[fg=#abb2bf,bg=#282c34] {format} "
+    datetime_format "%H:%M %d-%b"
 }
 
 // Navigation keybinds (Lightning style)
