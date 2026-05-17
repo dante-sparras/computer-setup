@@ -18,6 +18,6 @@ image_quality = 75
 
 [opener]
 edit = [
-  { run = 'code-insiders "$@"', block = true, desc = "VS Code Insiders" },
-  { run = 'code "$@"',        block = true, desc = "VS Code" },
+  { run = 'code-insiders.exe "$@"', block = true, desc = "VS Code Insiders" },
+  { run = 'code.exe "$@"',        block = true, desc = "VS Code" },
 ]
