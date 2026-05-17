@@ -4,6 +4,7 @@ theme "dracula"
 
 default_layout "compact"
 default_shell "zsh"
+editor "code-insiders"
 
 pane_frames true
 simplified_ui false
