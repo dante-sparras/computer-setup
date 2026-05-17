@@ -248,3 +248,13 @@ z() {
         zellij attach -c "$session"
     fi
 }
+
+# =============================================================================
+# Auto-start Zellij (optional)
+# =============================================================================
+# Uncomment the block below if you want Zellij to start automatically
+# when opening a new terminal (only if not already inside Zellij).
+
+#if [[ -z "$ZELLIJ" ]] && [[ "$TERM" != "dumb" ]]; then
+#    zellij attach -c main
+#fi
