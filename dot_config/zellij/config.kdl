@@ -1,6 +1,6 @@
 // Zellij configuration (no zjstatus)
 
-theme "onedark"
+theme "dracula"
 
 default_layout "compact"
 default_shell "zsh"
