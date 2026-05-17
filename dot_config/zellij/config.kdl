@@ -11,23 +11,17 @@ mouse_mode true
 
 keybinds {
     normal {
-        // === Pane Navigation (Alt + hjkl) ===
-        bind "Alt h" { MoveFocus "left"; }
-        bind "Alt l" { MoveFocus "right"; }
-        bind "Alt j" { MoveFocus "down"; }
-        bind "Alt k" { MoveFocus "up"; }
+        // Resize panes
+        bind "Alt Shift h" { Resize "Left"; }
+        bind "Alt Shift j" { Resize "Down"; }
+        bind "Alt Shift k" { Resize "Up"; }
+        bind "Alt Shift l" { Resize "Right"; }
 
-        // === Resize Panes (Alt + Shift + hjkl) ===
-        bind "Alt Shift h" { Resize "Increase Left"; }
-        bind "Alt Shift l" { Resize "Increase Right"; }
-        bind "Alt Shift j" { Resize "Increase Down"; }
-        bind "Alt Shift k" { Resize "Increase Up"; }
-
-        // === Close Pane ===
+        // Close pane
         bind "Alt q" { CloseFocus; }
 
-        // === Split Panes ===
-        bind "Alt |" { NewPane "Right"; }   // vertical split
-        bind "Alt -" { NewPane "Down"; }    // horizontal split
+        // Split panes - easier shortcuts
+        bind "Alt -" { NewPane "Down"; }     // Horizontal split
+        bind "Alt v" { NewPane "Right"; }    // Vertical split (easier than |)
     }
 }
