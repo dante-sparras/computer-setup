@@ -261,3 +261,15 @@ z() {
 if [[ -z "$ZELLIJ" ]] && [[ "$TERM" != "dumb" ]]; then
     zellij attach -c main
 fi
+
+# =============================================================================
+# Keybindings
+# =============================================================================
+
+# Ctrl + Left/Right Arrow → move by word
+bindkey '^[[1;5C' forward-word
+bindkey '^[[1;5D' backward-word
+
+# Ctrl + Backspace → delete previous word
+bindkey '^H' backward-kill-word
+bindkey '^?' backward-kill-word
