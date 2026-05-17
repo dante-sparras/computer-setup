@@ -100,25 +100,25 @@ install_chezmoi() {
 }
 
 install_cli_tools() {
-    log "Installing modern CLI tools (eza, bat, ripgrep, fd, zsh, etc.)..."
+    log "Installing modern CLI tools (eza, bat, ripgrep, fd, zsh, zellij, etc.)..."
 
     case "$OS" in
         linux|wsl)
             if command -v dnf >/dev/null 2>&1; then
-                sudo dnf install -y eza bat ripgrep fd-find zsh zoxide fzf starship yazi
+                sudo dnf install -y eza bat ripgrep fd-find zsh zoxide fzf starship yazi zellij
             elif command -v apt >/dev/null 2>&1; then
                 sudo apt update -y
                 sudo apt install -y eza bat ripgrep fd-find zsh zoxide fzf
-                sudo apt install -y yazi || true
+                sudo apt install -y yazi zellij || true
                 # starship via cargo or direct install
                 curl -sS https://starship.rs/install.sh | sh -s -- -y || true
             elif command -v pacman >/dev/null 2>&1; then
-                sudo pacman -S --noconfirm eza bat ripgrep fd zsh zoxide fzf starship yazi
+                sudo pacman -S --noconfirm eza bat ripgrep fd zsh zoxide fzf starship yazi zellij
             fi
             ;;
         macos)
             if command -v brew >/dev/null 2>&1; then
-                brew install eza bat ripgrep fd zsh zoxide fzf starship yazi
+                brew install eza bat ripgrep fd zsh zoxide fzf starship yazi zellij
             fi
             ;;
     esac
