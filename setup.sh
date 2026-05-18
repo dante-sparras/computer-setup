@@ -106,10 +106,10 @@ install_cli_tools() {
     case "$OS" in
         linux|wsl)
             if command -v dnf >/dev/null 2>&1; then
-                sudo dnf install -y eza bat ripgrep fd-find zsh zoxide fzf starship yazi zellij neovim
+                sudo dnf install -y eza bat ripgrep fd-find zsh zoxide fzf starship yazi zellij neovim gcc gcc-c++ make tree-sitter-cli
             elif command -v apt >/dev/null 2>&1; then
                 sudo apt update -y
-                sudo apt install -y eza bat ripgrep fd-find zsh zoxide fzf neovim
+                sudo apt install -y eza bat ripgrep fd-find zsh zoxide fzf neovim gcc gcc-c++ make tree-sitter-cli
                 sudo apt install -y yazi zellij || true
                 # starship via cargo or direct install
                 curl -sS https://starship.rs/install.sh | sh -s -- -y || true
