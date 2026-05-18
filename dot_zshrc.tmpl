@@ -1,7 +1,5 @@
 {{- if .is_wsl }}
-# =============================================================================
 # WSL (Windows Subsystem for Linux)
-# =============================================================================
 
 # Aliases
 
@@ -54,9 +52,7 @@ code() {
 
 {{- end }}
 
-# =============================================================================
 # Functions
-# =============================================================================
 
 update() {
   if command -v dnf >/dev/null 2>&1; then
@@ -80,9 +76,7 @@ update() {
   hash -r 2>/dev/null || true
 }
 
-# =============================================================================
 # Aliases
-# =============================================================================
 
 alias ..='cd ..'
 alias ...='cd ../..'
@@ -113,15 +107,11 @@ if command -v fastfetch >/dev/null 2>&1; then
   alias sysinfo='fastfetch'
 fi
 
-# =============================================================================
 # Environment Variables
-# =============================================================================
 
 export PATH="$HOME/.local/bin:$PATH"
 
-# =============================================================================
 # Initialization
-# =============================================================================
 
 if command -v zoxide >/dev/null 2>&1; then
   eval "$(zoxide init zsh --cmd cd)"
@@ -132,13 +122,11 @@ if command -v fzf >/dev/null 2>&1; then
 fi
 
 
-# =============================================================================
 if command -v starship >/dev/null 2>&1; then
   eval "$(starship init zsh)"
 fi
 
 # Yazi
-# =============================================================================
 
 # Open Yazi and cd into the directory you exit from
 y() {
@@ -173,9 +161,7 @@ if command -v yazi >/dev/null 2>&1; then
     _yazi_ensure_plugins &!
 fi
 
-# =============================================================================
 # Completion System
-# =============================================================================
 
 autoload -Uz compinit
 
@@ -230,9 +216,7 @@ fi
 export VISUAL="$EDITOR"
 
 
-# =============================================================================
 # Zellij
-# =============================================================================
 
 # Quick zellij helper: attach or create session (defaults to "main")
 z() {
@@ -245,21 +229,8 @@ z() {
 }
 
 
-# =============================================================================
-# Auto-start Zellij on shell launch
-# =============================================================================
-# Starts Zellij automatically when opening a new terminal.
-# - Only if not already inside a Zellij session ($ZELLIJ is unset)
-# - Skips dumb/non-interactive terminals
-# - Defaults to session "main"
 
-if [[ -z "$ZELLIJ" ]] && [[ "$TERM" != "dumb" ]]; then
-    zellij attach -c main
-fi
-
-# =============================================================================
 # Keybindings
-# =============================================================================
 
 # Word navigation
 bindkey '^[[1;5C' forward-word          # Ctrl + Right Arrow
@@ -272,9 +243,7 @@ bindkey '^W' backward-kill-word         # Ctrl + W (fallback)
 # Normal single-character Backspace
 bindkey '^?' backward-delete-char
 
-# =============================================================================
 # Utility Functions
-# =============================================================================
 
 # Reload Zsh configuration
 reload() {

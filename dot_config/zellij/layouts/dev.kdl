@@ -1,0 +1,17 @@
+// AI + Neovim development layout
+// Left: Grok Build CLI
+// Right: Neovim
+
+layout {
+    pane split_direction="vertical" {
+        pane {
+            name "Grok"
+            command "grok"
+            focus true
+        }
+        pane {
+            name "Neovim"
+            command "nvim"
+        }
+    }
+}
