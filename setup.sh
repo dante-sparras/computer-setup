@@ -107,6 +107,10 @@ install_cli_tools() {
         linux|wsl)
             if command -v dnf >/dev/null 2>&1; then
                 sudo dnf install -y eza bat ripgrep fd-find zsh zoxide fzf starship yazi zellij neovim gcc gcc-c++ make tree-sitter-cli
+            # Install latest tree-sitter CLI
+            curl -sL https://github.com/tree-sitter/tree-sitter/releases/latest/download/tree-sitter-linux-x64.gz | gunzip -c > /tmp/tree-sitter
+            chmod +x /tmp/tree-sitter
+            sudo mv /tmp/tree-sitter /usr/local/bin/tree-sitter
             elif command -v apt >/dev/null 2>&1; then
                 sudo apt update -y
                 sudo apt install -y eza bat ripgrep fd-find zsh zoxide fzf neovim gcc gcc-c++ make tree-sitter-cli
