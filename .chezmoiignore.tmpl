@@ -9,19 +9,22 @@ README.md
 
 {{- if .is_windows }}
 .zshrc
-# Windows ignore patterns here...
+# Windows-only files are managed here (e.g. AppData/...)
+{{- end }}
+
+{{- if not .is_windows }}
+# Windows-only directories — never create on Linux/WSL/macOS
+AppData/
 {{- end }}
 
 {{- if .is_linux }}
-AppData/Local/Packages/Microsoft.WindowsTerminal*/LocalState/settings.json
 # Linux ignore patterns here...
     
     {{- if .is_wsl }}
-    # WSL ignore patterns here...
+    # WSL-specific ignore patterns here...
     {{- end }}
 {{- end }}
 
 {{- if .is_macos }}
-AppData/Local/Packages/Microsoft.WindowsTerminal*/LocalState/settings.json
 # macOS ignore patterns here...
 {{- end }}
